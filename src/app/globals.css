@@ -96,20 +96,22 @@
   height: 24px;
   display: flex;
   align-items: center;
-  padding: 0;
+  padding: 0 8px;
   cursor: move;
   user-select: none;
   color: white;
-  border: none;
 }
 
 .mini-window-title {
-  padding: 0 8px;
+  flex: 1;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .mini-window-controls {
   display: flex;
-  margin-left: auto;
 }
 
 .mini-window-control {

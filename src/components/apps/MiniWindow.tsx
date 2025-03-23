@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { FaWindowMinimize, FaTimes, FaWindowMaximize } from 'react-icons/fa';
 
 interface MiniWindowProps {
   id: string;
@@ -27,118 +28,282 @@ const MiniWindow: React.FC<MiniWindowProps> = ({
   onMinimize,
   isActive = false,
   onActivate,
-  children
+  children,
 }) => {
-  const windowRef = useRef<HTMLDivElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
+  const [windowPosition, setWindowPosition] = useState(position);
+  const [windowSize, setWindowSize] = useState({ width, height });
   const [isDragging, setIsDragging] = useState(false);
-  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
-  const [currentPosition, setCurrentPosition] = useState(position);
+  const [isResizing, setIsResizing] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [isMaximized, setIsMaximized] = useState(false);
+  const windowRef = useRef<HTMLDivElement>(null);
+  const previousSizeRef = useRef({ width, height, x: position.x, y: position.y });
 
-  useEffect(() => {
-    setCurrentPosition(position);
-  }, [position]);
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (headerRef.current && headerRef.current.contains(e.target as Node)) {
-      setIsDragging(true);
-      if (onActivate) onActivate();
-
-      const rect = windowRef.current?.getBoundingClientRect();
-      if (rect) {
-        setDragOffset({
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top
-        });
-      }
+  // Handle window activation
+  const handleActivate = () => {
+    if (onActivate) {
+      onActivate();
     }
   };
 
-  const handleMouseMove = (e: MouseEvent) => {
-    if (isDragging && windowRef.current) {
-      e.preventDefault();
-
-      const newX = e.clientX - dragOffset.x;
-      const newY = e.clientY - dragOffset.y;
-
-      setCurrentPosition({ x: newX, y: newY });
-    }
+  // Handle window drag
+  const handleDragStart = (e: React.MouseEvent) => {
+    if (isMaximized) return;
+    e.preventDefault();
+    setIsDragging(true);
+    setDragStart({
+      x: e.clientX - windowPosition.x,
+      y: e.clientY - windowPosition.y
+    });
+    handleActivate();
   };
 
-  const handleMouseUp = () => {
+  const handleDragMove = (e: MouseEvent) => {
+    if (!isDragging) return;
+    
+    const newX = e.clientX - dragStart.x;
+    const newY = e.clientY - dragStart.y;
+    
+    // Optional: Add boundary constraints here if needed
+    setWindowPosition({ x: newX, y: newY });
+  };
+
+  const handleDragEnd = () => {
     setIsDragging(false);
   };
 
+  // Handle window resize
+  const handleResizeStart = (e: React.MouseEvent) => {
+    if (isMaximized) return;
+    e.preventDefault();
+    e.stopPropagation();
+    setIsResizing(true);
+    setDragStart({
+      x: e.clientX,
+      y: e.clientY
+    });
+  };
+
+  const handleResizeMove = (e: MouseEvent) => {
+    if (!isResizing) return;
+    
+    const deltaX = e.clientX - dragStart.x;
+    const deltaY = e.clientY - dragStart.y;
+    
+    setWindowSize({
+      width: Math.max(150, windowSize.width + deltaX),
+      height: Math.max(100, windowSize.height + deltaY)
+    });
+    
+    setDragStart({
+      x: e.clientX,
+      y: e.clientY
+    });
+  };
+
+  const handleResizeEnd = () => {
+    setIsResizing(false);
+  };
+
+  // Handle maximize/restore
+  const handleMaximizeToggle = () => {
+    if (isMaximized) {
+      // Restore to previous size
+      setWindowSize({
+        width: previousSizeRef.current.width,
+        height: previousSizeRef.current.height
+      });
+      setWindowPosition({
+        x: previousSizeRef.current.x,
+        y: previousSizeRef.current.y
+      });
+      setIsMaximized(false);
+    } else {
+      // Save current size and position
+      previousSizeRef.current = {
+        width: windowSize.width,
+        height: windowSize.height,
+        x: windowPosition.x,
+        y: windowPosition.y
+      };
+      
+      // Maximize to full content area
+      const contentArea = document.querySelector('.win10-content');
+      if (contentArea) {
+        const rect = contentArea.getBoundingClientRect();
+        setWindowSize({
+          width: rect.width,
+          height: rect.height
+        });
+        setWindowPosition({
+          x: 0,
+          y: 0
+        });
+      } else {
+        // Fallback if content area not found
+        setWindowSize({
+          width: window.innerWidth,
+          height: window.innerHeight - 100 // Approximate for taskbar
+        });
+        setWindowPosition({
+          x: 0,
+          y: 0
+        });
+      }
+      setIsMaximized(true);
+    }
+  };
+
+  // Add and remove event listeners
   useEffect(() => {
-    if (isDragging) {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (isDragging) {
+        handleDragMove(e);
+      } else if (isResizing) {
+        handleResizeMove(e);
+      }
+    };
+    
+    const handleMouseUp = () => {
+      if (isDragging) {
+        handleDragEnd();
+      } else if (isResizing) {
+        handleResizeEnd();
+      }
+    };
+    
+    if (isDragging || isResizing) {
       document.addEventListener('mousemove', handleMouseMove);
       document.addEventListener('mouseup', handleMouseUp);
-    } else {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
     }
-
+    
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [isDragging]);
+  }, [isDragging, isResizing, windowSize, dragStart, windowPosition]);
 
-  if (isMinimized) return null;
+  if (isMinimized) {
+    return null;
+  }
 
   return (
     <div
       ref={windowRef}
-      className={`mini-window ${isActive ? 'active' : ''}`}
+      className={`win10-window ${isDragging ? 'dragging' : ''} ${isResizing ? 'resizing' : ''} ${isMaximized ? 'maximized' : ''}`}
       style={{
-        width: `${width}px`,
-        height: `${height}px`,
-        left: `${currentPosition.x}px`,
-        top: `${currentPosition.y}px`,
-        zIndex: isActive ? 100 : 10
+        width: `${windowSize.width}px`,
+        height: `${windowSize.height}px`,
+        position: 'absolute',
+        left: windowPosition.x,
+        top: windowPosition.y,
+        willChange: isDragging || isResizing ? 'transform, width, height' : 'auto',
+        zIndex: isActive ? 200 : 100,
       }}
-      onMouseDown={(e) => {
-        handleMouseDown(e);
-        if (onActivate) onActivate();
-      }}
+      onClick={handleActivate}
     >
-      <div ref={headerRef} className="mini-window-header">
-        <div className="mini-window-title">{title}</div>
-        <div className="mini-window-controls">
-          <button 
-            className="mini-window-control minimize" 
-            onClick={(e) => {
-              e.stopPropagation();
-              onMinimize(id);
-            }}
-            aria-label="Minimize"
+      <div 
+        className={`win10-window-header ${isActive ? 'win10-window-header-active' : 'win10-window-header-inactive'}`}
+        onMouseDown={handleDragStart}
+        onDoubleClick={handleMaximizeToggle}
+      >
+        <div className="win10-window-title">{title}</div>
+        <div className="win10-window-controls">
+          <button
+            className="win10-window-control win10-minimize"
+            onClick={() => onMinimize(id)}
+            aria-label="Minimera"
+            style={{ width: '39px', height: '28px', padding: 0 }}
           >
-            &#x2012;
+            <FaWindowMinimize size={10} />
           </button>
-          <button 
-            className="mini-window-control maximize" 
-            onClick={(e) => e.stopPropagation()}
-            aria-label="Maximize"
+          <button
+            className="win10-window-control win10-maximize"
+            onClick={handleMaximizeToggle}
+            aria-label={isMaximized ? "Återställ" : "Maximera"}
+            style={{ width: '39px', height: '28px', padding: 0 }}
           >
-            &#x25A1;
+            <FaWindowMaximize size={10} />
           </button>
-          <button 
-            className="mini-window-control close" 
-            onClick={(e) => {
-              e.stopPropagation();
-              onClose(id);
-            }}
-            aria-label="Close"
+          <button
+            className="win10-window-control win10-close"
+            onClick={() => onClose(id)}
+            aria-label="Stäng"
+            style={{ width: '39px', height: '28px', padding: 0 }}
           >
-            &#x2715;
+            <FaTimes size={10} />
           </button>
         </div>
       </div>
-      <div className="mini-window-content">
+      <div className="win10-window-content">
         {children}
       </div>
+      {!isMaximized && (
+        <>
+          <div 
+            className="win10-resize-handle win10-resize-n" 
+            onMouseDown={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              // Handle north resize logic
+            }}
+          />
+          <div 
+            className="win10-resize-handle win10-resize-e" 
+            onMouseDown={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              // Handle east resize logic
+            }}
+          />
+          <div 
+            className="win10-resize-handle win10-resize-s" 
+            onMouseDown={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              // Handle south resize logic
+            }}
+          />
+          <div 
+            className="win10-resize-handle win10-resize-w" 
+            onMouseDown={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              // Handle west resize logic
+            }}
+          />
+          <div 
+            className="win10-resize-handle win10-resize-ne" 
+            onMouseDown={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              // Handle northeast resize logic
+            }}
+          />
+          <div 
+            className="win10-resize-handle win10-resize-se" 
+            onMouseDown={handleResizeStart}
+          />
+          <div 
+            className="win10-resize-handle win10-resize-sw" 
+            onMouseDown={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              // Handle southwest resize logic
+            }}
+          />
+          <div 
+            className="win10-resize-handle win10-resize-nw" 
+            onMouseDown={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              // Handle northwest resize logic
+            }}
+          />
+        </>
+      )}
     </div>
   );
 };
 
-export default MiniWindow;
+export default MiniWindow; 
