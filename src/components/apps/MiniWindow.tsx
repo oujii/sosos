@@ -211,19 +211,27 @@ const MiniWindow: React.FC<MiniWindowProps> = ({
         <div className="win10-window-title">
           {/* Window icon based on title */}
           <span className="win10-window-icon" style={{paddingLeft: '5px'}}>
-            {title.includes('Systemövervakning') && <img src="/app-icons/Computer.ico" width="16" height="16" alt="" />}
-            {title.includes('Systemvarningar') && <img src="/app-icons/112_Tick_Green.ico" width="16" height="16" alt="" />}
-            {title.includes('Responsstatistik') && <img src="/app-icons/ChartBar.ico" width="16" height="16" alt="" />}
-            {title.includes('Tillgänglig Personal') && <img src="/app-icons/112_Persona_Blue.ico" width="16" height="16" alt="" />}
-            {title.includes('Nödprotokoll') && <img src="/app-icons/005_Task.ico" width="16" height="16" alt="" />}
-            {title.includes('Akut Händelserapport') && <img src="/app-icons/008_Reminder.ico" width="16" height="16" alt="" />}
-            {title.includes('Kontrollpanel') && <img src="/app-icons/Gear.ico" width="16" height="16" alt="" />}
-            {title.includes('Hjälp') && <img src="/app-icons/help.ico" width="16" height="16" alt="" />}
-            {title.includes('Systemlogg') && <img src="/app-icons/112_Paste_Blue.ico" width="16" height="16" alt="" />}
-            {title.includes('Nätverksöversikt') && <img src="/app-icons/Network.ico" width="16" height="16" alt="" />}
+            {title.includes('Systemövervakning') && <img src="/app-icons/Computer.ico" width="24" height="24" alt="" />}
+            {title.includes('Systemvarningar') && <img src="/app-icons/warning.ico" width="24" height="24" alt="" />}
+            {title.includes('Responsstatistik') && <img src="/app-icons/task.ico" width="24" height="24" alt="" />}
+            {title.includes('Tillgänglig Personal') && <img src="/app-icons/warning.ico" width="24" height="24" alt="" />}
+            {title.includes('Nödprotokoll') && <img src="/app-icons/task.ico" width="24" height="24" alt="" />}
+            {title.includes('Akut Händelserapport') && <img src="/app-icons/reminder.ico" width="24" height="24" alt="" />}
+            {title.includes('Kontrollpanel') && <img src="/app-icons/task.ico" width="24" height="24" alt="" />}
+            {title.includes('Hjälp') && <img src="/app-icons/help.ico" width="24" height="24" alt="" />}
+            {title.includes('Systemlogg') && <img src="/app-icons/task.ico" width="24" height="24" alt="" />}
+            {title.includes('Nätverksöversikt') && <img src="/app-icons/network.ico" width="24" height="24" alt="" />}
             {/* Default icon for windows that don't match specific criteria */}
             {!title.includes('Systemövervakning') && 
              !title.includes('Systemvarningar') && 
+             !title.includes('Responsstatistik') &&
+             !title.includes('Tillgänglig Personal') &&
+             !title.includes('Nödprotokoll') &&
+             !title.includes('Akut Händelserapport') &&
+             !title.includes('Kontrollpanel') &&
+             !title.includes('Hjälp') &&
+             !title.includes('Systemlogg') &&
+             !title.includes('Nätverksöversikt') && <img src="/app-icons/task.ico" width="24" height="24" alt="" />} 
              !title.includes('Kontrollpanel') && 
              !title.includes('Hjälp') && 
              !title.includes('Systemlogg') && 
