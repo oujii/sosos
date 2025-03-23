@@ -433,11 +433,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0;
+  padding: 0 4px;
   cursor: move;
   user-select: none;
   height: 28px;
-  border: none;
 }
 
 .win10-window-header-active {
@@ -460,52 +459,28 @@
 
 .win10-window-controls {
   display: flex;
-  height: 28px;
 }
 
 .win10-window-control {
-  width: 46px;
+  width: 39px;
   height: 28px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   transition: background-color 0.2s;
-  background: transparent;
+  background: none;
   border: none;
-  outline: none;
   color: white;
   padding: 0;
-  margin: 0;
-}
-
-.win10-window-header-inactive .win10-window-control {
-  color: #000;
 }
 
 .win10-window-control:hover {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-.win10-window-control.win10-minimize:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-.win10-window-control.win10-maximize:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
 .win10-window-control.win10-close:hover {
   background-color: #e81123;
-}
-
-.win10-window-header-inactive .win10-window-control:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-.win10-window-header-inactive .win10-window-control.win10-close:hover {
-  background-color: #e81123;
-  color: white;
 }
 
 .win10-window-content {
