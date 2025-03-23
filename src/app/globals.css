@@ -1360,8 +1360,7 @@ legend {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding-left: 8px;
-  padding-right: 4px;
+  margin-right: 6px;
   width: 16px;
   height: 16px;
   font-size: 14px;

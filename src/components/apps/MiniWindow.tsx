@@ -210,40 +210,18 @@ const MiniWindow: React.FC<MiniWindowProps> = ({
       >
         <div className="win10-window-title">
           {/* Window icon based on title */}
-          <span className="win10-window-icon" style={{paddingLeft: '5px'}}>
-            {title.includes('Systemövervakning') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Objects - VS2012/ico_format/WinVista/005_Task.ico" width="28" height="28" alt="" />}
-            {title.includes('Systemvarningar') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Objects - VS2012/ico_format/WinVista/008_Reminder.ico" width="28" height="28" alt="" />}
-            {title.includes('Responsstatistik') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Objects - VS2012/ico_format/WinVista/005_Task.ico" width="28" height="28" alt="" />}
-            {title.includes('Tillgänglig Personal') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Actions - VS2010/ico_format/WinVista/112_ArrowCurve_Blue_Right.ico" width="28" height="28" alt="" />}
-            {title.includes('Nödprotokoll') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Actions - VS2010/ico_format/WinVista/112_DownArrowLong_Blue.ico" width="28" height="28" alt="" />}
-            {title.includes('Akut Händelserapport') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Objects - VS2012/ico_format/WinVista/008_Reminder.ico" width="28" height="28" alt="" />}
-            {title.includes('Kontrollpanel') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Actions - VS2010/ico_format/WinVista/126_Edit.ico" width="28" height="28" alt="" />}
-            {title.includes('Hjälp') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Objects - VS2012/ico_format/WinVista/112_Tick_Green.ico" width="28" height="28" alt="" />}
-            {title.includes('Systemlogg') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Actions - VS2010/ico_format/WinVista/112_RefreshArrow_Blue.ico" width="28" height="28" alt="" />}
-            {title.includes('Nätverksöversikt') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Objects - VS2012/ico_format/WinVista/112_Server_Blue.ico" width="28" height="28" alt="" />}
-            {/* Default icon for windows that don't match specific criteria */}
-            {!title.includes('Systemövervakning') && 
-             !title.includes('Systemvarningar') && 
-             !title.includes('Responsstatistik') &&
-             !title.includes('Tillgänglig Personal') &&
-             !title.includes('Nödprotokoll') &&
-             !title.includes('Akut Händelserapport') &&
-             !title.includes('Kontrollpanel') &&
-             !title.includes('Hjälp') &&
-             !title.includes('Systemlogg') &&
-             !title.includes('Nätverksöversikt') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Objects - VS2012/ico_format/WinVista/005_Task.ico" width="28" height="28" alt="" />}
-             {!title.includes('Systemövervakning') && 
-             !title.includes('Systemvarningar') && 
-             !title.includes('Responsstatistik') &&
-             !title.includes('Tillgänglig Personal') &&
-             !title.includes('Nödprotokoll') &&
-             !title.includes('Akut Händelserapport') &&
-             !title.includes('Hjälp') &&
-             !title.includes('Systemlogg') &&
-             !title.includes('Nätverksöversikt') &&
-             !title.includes('Kontrollpanel') &&
-             !title.includes('Insatskarta') && 
-             <img src="/icons/VS2012 Modern Image Library/x--archive--x/Objects - VS2012/ico_format/WinVista/003_Folder.ico" width="28" height="28" alt="" />}
+          <span className="win10-window-icon mr-2">
+            {title.includes('Systemövervakning') && <i className="fas fa-desktop"></i>}
+            {title.includes('Systemvarningar') && <i className="fas fa-exclamation-triangle"></i>}
+            {title.includes('Kontrollpanel') && <i className="fas fa-sliders-h"></i>}
+            {title.includes('Hjälp') && <i className="fas fa-question-circle"></i>}
+            {title.includes('Systemlogg') && <i className="fas fa-clipboard-list"></i>}
+            {title.includes('Nätverksöversikt') && <i className="fas fa-network-wired"></i>}
+            {title.includes('Akut') && <i className="fas fa-ambulance"></i>}
+            {title.includes('Tillgänglig Personal') && <i className="fas fa-users"></i>}
+            {title.includes('Nödprotokoll') && <i className="fas fa-clipboard-check"></i>}
+            {title.includes('Insatskarta') && <i className="fas fa-map-marked-alt"></i>}
+            {!title.match(/(Systemövervakning|Systemvarningar|Kontrollpanel|Hjälp|Systemlogg|Nätverksöversikt|Akut|Tillgänglig Personal|Nödprotokoll|Insatskarta)/) && <i className="fas fa-window-restore"></i>}
           </span>
           {title}
         </div>
