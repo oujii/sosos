@@ -1,0 +1,551 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding:0;
+    font-family: 'Segoe UI';
+    background-size: cover;
+    background-image: url(../img/background.jpg);
+}
+
+span {
+    font-size: 0.75em;
+    cursor: default;
+}
+ul {
+    list-style-type: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    margin: 0;
+    /*padding: 2px 0px 2px 15px;*/
+    width: 100%;
+}
+ul ul li {
+    padding: 3px 0px 3px 35px;
+}
+
+ul ul li:hover, .group:hover, td:hover {
+    background: rgb(229, 243, 255);
+}
+
+#folder-tree ul ul li:hover, .group:hover {
+    cursor: pointer;
+}
+
+ul ul li:active, .group:active, .current-folder {
+    background: rgb(204, 232, 255);
+}
+
+td:active, td:visited {
+    background: rgb(204, 232, 255);
+    border: 1px solid rgb(153, 209, 255);
+}
+
+div>ul {
+    height: 95%; 
+    width: 75%;
+    overflow: hidden;
+}
+
+div {
+    cursor: default;
+}
+
+td {
+    width: 33.33%;
+    border: 1px solid white;
+    text-align: center;
+    padding: 5px;
+}
+
+table, tr {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.small-icon {
+    width: 18px;
+    height: 100%;
+}
+
+.folder-name {
+    width: 100%;
+    font-size: 0.75em;
+    text-align: center;
+}
+
+.group {
+    font-size: 0.9em;
+    padding: 4px 0px 4px 25px;
+}
+
+#titlebar {
+    height: 30px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #1979CA;
+    color:white;
+}
+
+#titlebar span {
+    margin: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 4.5px;
+    padding-bottom: 4.5px;
+}
+
+.max-min-close {
+    float: right;
+    width: 30px;
+    padding: 10px;
+    text-align: center;
+}
+
+#close, #min {
+    font-size: 0.9em;
+}
+span#max {
+    font-size: 1.4em;
+    line-height: 0.7em;
+    padding-bottom: 10px;
+}
+
+#max:hover, #min:hover {
+    background-color: rgb(229,229,229);
+}
+
+#close:hover {
+    color:white;
+    background-color: rgb(232,17,35);
+}
+
+#menubar {
+    height: 22px;
+    border-bottom: 1px solid rgb(218, 219, 220);
+}
+
+#menubar span {
+    margin: 0.1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 2.5px;
+    padding-bottom: 2.5px;
+    font-size: 0.7em;
+}
+
+#menubar span:not(#file) {
+    border: 1px solid white;
+    border-bottom: 0px;
+}
+
+#menubar span:not(#file):hover {
+    border: 1px solid rgb(218, 219, 220);
+    border-bottom: 0px;
+}
+
+#file {
+    border-top: 1px solid #1979CA;
+    border-right: 1px solid #1979CA;
+    background-color: #1979CA;
+    color: white;
+}
+
+#file:hover {
+    background-color: rgb(41, 140, 255);
+}
+
+#addressbar {
+    padding: 0px 4px 0px 4px;
+    height: 25px;
+    min-height: 25px;
+    max-height: 25px;
+}
+
+#addressbar>input {
+    padding: 1px 4px 1px 4px;
+    margin: 6px;
+    border: 1px solid rgb(218, 219, 220);
+    float:right;
+}
+
+#searchbox {
+    color: rgb(161, 161, 161);
+
+    width: 110px;
+}
+
+#addressbox {
+    color: black;
+    width: 500px;
+}
+
+#content-block {
+    height: calc(100% - 77px); /* 30px titlebar + 22px menubar + 25px addressbar */
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+}
+
+#folder-tree {
+    position: relative;
+    width: 22%;
+    height: calc(100% - 20px); /* Subtract statusbar height */
+    background-color: transparent;
+    background-image: url(../img/column-left.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+#folder-tree img {
+    width: 20px;
+    float: left;
+}
+
+#folder-tree span.grpup, #folder-tree li {
+    font-size: 0.9em;
+}
+
+#folder-tree ul, #folder-tree li, #folder-tree .group {
+    opacity: 0; /* Hide the text content */
+}
+
+#main-content {
+    position: relative;
+    width: 50%;
+    height: calc(100% - 20px); /* Subtract statusbar height */
+    background-color: #f0f0f0;
+    background-image: none;
+    overflow: hidden;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+#main-content table {
+    display: none; /* Hide the original table content */
+}
+
+#main-content img {
+    height: 80px;
+    width: 80px;
+}
+
+#details-panel {
+    position: relative;
+    width: 28%;
+    height: calc(100% - 20px); /* Subtract statusbar height */
+    background-color: transparent;
+    background-image: url(../img/column_right.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+#details-panel h3, .detail-item {
+    display: none;
+}
+
+#details-panel textarea {
+    width: 83%;
+    height: 80%;
+    margin: 8% 2% auto;
+    display: block;
+    background-color: transparent;
+    border: none;
+    resize: none;
+    font-family: 'Segoe UI';
+    font-size: 0.7em;
+    outline: none; /* Remove the focus outline */
+}
+
+#details-panel textarea:focus {
+    outline: none; /* Remove the focus outline when focused */
+    border: none;
+    box-shadow: none;
+}
+
+#statusbar {
+    position: absolute;
+    bottom: 0;
+    height: 20px;
+    min-height: 20px;
+    max-height: 20px;
+    width: 100%;
+    background-color: yellow;
+    background-image: url(../img/row-lower.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+#status {
+    font-size: 0.7em;
+    padding: 3px 10px 3px 10px;
+    line-height: 0.5em;
+}
+
+#file-explorer {
+    width: 99%;
+    height: calc(90% - 50px);
+    position: fixed;
+    margin: 0 auto;
+    top: 5px;
+    left: 1%;
+    padding: 0;
+    border: 1px solid rgb(99, 180, 251);
+    box-shadow: 0 0 15px gray;
+    background-color: white;
+    resize: both;
+    overflow: hidden;
+}
+
+#taskbar-wrapper {
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    z-index: 1000;
+}
+
+#taskbar {
+    height: 43px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+
+#quickstart {
+    float: left;
+}
+
+#quickstart img {
+    width: 24px;
+    height: 100%;
+    padding-left: 12.5px;
+    padding-right: 12.5px;
+    padding-top: 7.8px;
+    padding-bottom: 7.8px;
+    margin: 0px;
+}
+
+#taskbar img:hover, #tray>span:hover {
+    background-color: #191C1F;
+}
+
+#taskbar img:active, #tray>span:active {
+    background-color: rgb(12, 16, 20);
+}
+
+#tray {
+    height: 100%;
+    width: 240px;
+    margin: 0;
+    padding: 0;
+    float: right;
+}
+
+#tray span {
+    margin: 0;
+    font-size: 0.75em;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 5.5px;
+    padding-bottom: 5.5px;
+    float: right;
+    color: white;
+    text-align: center;
+}
+
+#language {
+    line-height: 270%;
+}
+
+/* Remove scrollbars from all elements */
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+}
+
+/* Hide scrollbars for IE, Edge and Firefox */
+* {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* SOS Agent Interface Styles */
+.sos-form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.sos-form h2 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    color: #1979CA;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+
+.form-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.form-group {
+    flex: 1;
+}
+
+.form-group label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 3px;
+    color: #333;
+    font-weight: bold;
+}
+
+.form-control {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 12px;
+    box-sizing: border-box;
+}
+
+select.form-control {
+    background-color: white;
+}
+
+.form-control:focus {
+    border-color: #1979CA;
+    outline: none;
+}
+
+.incident-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.incident-notes {
+    flex: 1;
+    margin-top: 10px;
+}
+
+.incident-notes textarea {
+    width: 100%;
+    height: 92%;
+    resize: none;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 5px;
+    font-size: 12px;
+    box-sizing: border-box;
+}
+
+.incident-notes textarea:focus {
+    outline: none;
+    border: 1px solid #ccc;
+}
+
+/* Specific incident type sections */
+.incident-specific {
+    display: none;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.incident-specific.active {
+    display: block;
+}
+
+.priority-high {
+    background-color: #ffebee;
+    border-left: 4px solid #f44336;
+}
+
+.priority-medium {
+    background-color: #fff8e1;
+    border-left: 4px solid #ffc107;
+}
+
+.priority-low {
+    background-color: #e8f5e9;
+    border-left: 4px solid #4caf50;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn {
+    padding: 5px 15px;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #1979CA;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    color: #333;
+}
+
+.btn-danger {
+    background-color: #f44336;
+    color: white;
+}
+
+/* Status indicator */
+.status-indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.status-new {
+    background-color: #f44336;
+}
+
+.status-in-progress {
+    background-color: #ffc107;
+}
+
+.status-resolved {
+    background-color: #4caf50;
+}
+
+#system-time {
+    cursor: pointer;
+}
