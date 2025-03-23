@@ -226,12 +226,31 @@ const MiniWindow: React.FC<MiniWindowProps> = ({
             <FaWindowMaximize size={10} />
           </button>
           <button
+            className="win10-window-control win10-minimize"
+            onClick={() => onMinimize(id)}
+            aria-label="Minimera"
+          >
+            <span style={{ fontSize: '10px', fontWeight: 'bold', position: 'relative', top: '-3px' }}>_</span>
+          </button>
+          <button
+            className="win10-window-control win10-maximize"
+            onClick={() => onMaximize(id)}
+            aria-label={isMaximized ? "Återställ" : "Maximera"}
+          >
+            {isMaximized ? (
+              <div style={{ width: '10px', height: '10px', border: '1px solid currentColor', position: 'relative', top: '0px', left: '2px' }}>
+                <div style={{ width: '6px', height: '6px', border: '1px solid currentColor', position: 'absolute', top: '-3px', left: '-3px', backgroundColor: 'currentColor', zIndex: 1 }}></div>
+              </div>
+            ) : (
+              <div style={{ width: '10px', height: '10px', border: '1px solid currentColor' }}></div>
+            )}
+          </button>
+          <button
             className="win10-window-control win10-close"
             onClick={() => onClose(id)}
             aria-label="Stäng"
-            style={{ width: '39px', height: '28px', padding: 0 }}
           >
-            <FaTimes size={10} />
+            <span style={{ fontSize: '14px', fontWeight: 'normal' }}>×</span>
           </button>
         </div>
       </div>
