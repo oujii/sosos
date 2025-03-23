@@ -211,17 +211,16 @@ const MiniWindow: React.FC<MiniWindowProps> = ({
         <div className="win10-window-title">
           {/* Window icon based on title */}
           <span className="win10-window-icon" style={{paddingLeft: '5px'}}>
-            {title.includes('Systemövervakning') && <i className="fas fa-desktop"></i>}
-            {title.includes('Systemvarningar') && <i className="fas fa-exclamation-triangle"></i>}
-            {title.includes('Responsstatistik') && <i className="fas fa-chart-bar"></i>}
-            {title.includes('Tillgänglig Personal') && <i className="fas fa-users"></i>}
-            {title.includes('Nödprotokoll') && <i className="fas fa-clipboard-check"></i>}
-            {title.includes('Akut Händelserapport') && <i className="fas fa-ambulance"></i>}
-            {title.includes('Kontrollpanel') && <i className="fas fa-cogs"></i>}
-            {title.includes('Hjälp') && <i className="fas fa-question-circle"></i>}
-            {title.includes('Systemlogg') && <i className="fas fa-clipboard-list"></i>}
-            {title.includes('Nätverksöversikt') && <i className="fas fa-network-wired"></i>}
-            {title.includes('Insatskarta') && <i className="fas fa-map-marked-alt"></i>}
+            {title.includes('Systemövervakning') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Objects - VS2012/ico_format/WinVista/Computer.ico" width="16" height="16" alt="" />}
+            {title.includes('Systemvarningar') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Objects - VS2012/ico_format/WinVista/112_Tick_Green.ico" width="16" height="16" alt="" />}
+            {title.includes('Responsstatistik') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Objects - VS2012/ico_format/WinVista/ChartBar.ico" width="16" height="16" alt="" />}
+            {title.includes('Tillgänglig Personal') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Objects - VS2012/ico_format/WinVista/112_Persona_Blue.ico" width="16" height="16" alt="" />}
+            {title.includes('Nödprotokoll') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Objects - VS2012/ico_format/WinVista/005_Task.ico" width="16" height="16" alt="" />}
+            {title.includes('Akut Händelserapport') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Objects - VS2012/ico_format/WinVista/008_Reminder.ico" width="16" height="16" alt="" />}
+            {title.includes('Kontrollpanel') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Objects - VS2012/ico_format/WinVista/Gear.ico" width="16" height="16" alt="" />}
+            {title.includes('Hjälp') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Objects - VS2012/ico_format/WinVista/112_Help_Blue.ico" width="16" height="16" alt="" />}
+            {title.includes('Systemlogg') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Objects - VS2012/ico_format/WinVista/112_Paste_Blue.ico" width="16" height="16" alt="" />}
+            {title.includes('Nätverksöversikt') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Objects - VS2012/ico_format/WinVista/Network.ico" width="16" height="16" alt="" />}
             {/* Default icon for windows that don't match specific criteria */}
             {!title.includes('Systemövervakning') && 
              !title.includes('Systemvarningar') && 
@@ -232,9 +231,8 @@ const MiniWindow: React.FC<MiniWindowProps> = ({
              !title.includes('Responsstatistik') &&
              !title.includes('Tillgänglig Personal') &&
              !title.includes('Nödprotokoll') &&
-             !title.includes('Akut Händelserapport') &&
-             !title.includes('Insatskarta') && 
-             <i className="fas fa-window-restore"></i>}
+             !title.includes('Akut Händelserapport') && 
+             <img src="/icons/VS2012 Modern Image Library/x--archive--x/Objects - VS2012/ico_format/WinVista/Tip.ico" width="16" height="16" alt="" />}
           </span>
           {title}
         </div>
