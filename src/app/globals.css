@@ -1326,10 +1326,20 @@ legend {
   padding: 0;
 }
 
-/* Ensure window control buttons never have shadows */
+/* Ensure window control buttons never have shadows or 7.css styling */
 .win10-window-control, 
 .win10-minimize, 
 .win10-maximize, 
 .win10-close {
   box-shadow: none !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  font-family: 'Segoe UI', sans-serif !important;
+  background-image: none !important;
+  text-shadow: none !important;
+  transition: background-color 0.2s !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
