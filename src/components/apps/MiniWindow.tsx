@@ -211,16 +211,16 @@ const MiniWindow: React.FC<MiniWindowProps> = ({
         <div className="win10-window-title">
           {/* Window icon based on title */}
           <span className="win10-window-icon" style={{paddingLeft: '5px'}}>
-            {title.includes('Systemövervakning') && <img src="/app-icons/005_Task.ico" width="24" height="24" alt="" />}
-            {title.includes('Systemvarningar') && <img src="/app-icons/008_Reminder.ico" width="24" height="24" alt="" />}
-            {title.includes('Responsstatistik') && <img src="/app-icons/005_Task.ico" width="24" height="24" alt="" />}
-            {title.includes('Tillgänglig Personal') && <img src="/app-icons/112_ArrowCurveBlue_Right.ico" width="24" height="24" alt="" />}
-            {title.includes('Nödprotokoll') && <img src="/app-icons/112_DownArrowLong_Blue.ico" width="24" height="24" alt="" />}
-            {title.includes('Akut Händelserapport') && <img src="/app-icons/008_Reminder.ico" width="24" height="24" alt="" />}
-            {title.includes('Kontrollpanel') && <img src="/app-icons/126_Edit.ico" width="24" height="24" alt="" />}
-            {title.includes('Hjälp') && <img src="/app-icons/help.ico" width="24" height="24" alt="" />}
-            {title.includes('Systemlogg') && <img src="/app-icons/112_RefreshArrow_Blue.ico" width="24" height="24" alt="" />}
-            {title.includes('Nätverksöversikt') && <img src="/app-icons/TaskBrowse.ico" width="24" height="24" alt="" />}
+            {title.includes('Systemövervakning') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Objects - VS2012/ico_format/WinVista/005_Task.ico" width="28" height="28" alt="" />}
+            {title.includes('Systemvarningar') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Objects - VS2012/ico_format/WinVista/008_Reminder.ico" width="28" height="28" alt="" />}
+            {title.includes('Responsstatistik') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Objects - VS2012/ico_format/WinVista/005_Task.ico" width="28" height="28" alt="" />}
+            {title.includes('Tillgänglig Personal') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Actions - VS2010/ico_format/WinVista/112_ArrowCurve_Blue_Right.ico" width="28" height="28" alt="" />}
+            {title.includes('Nödprotokoll') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Actions - VS2010/ico_format/WinVista/112_DownArrowLong_Blue.ico" width="28" height="28" alt="" />}
+            {title.includes('Akut Händelserapport') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Objects - VS2012/ico_format/WinVista/008_Reminder.ico" width="28" height="28" alt="" />}
+            {title.includes('Kontrollpanel') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Actions - VS2010/ico_format/WinVista/126_Edit.ico" width="28" height="28" alt="" />}
+            {title.includes('Hjälp') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Objects - VS2012/ico_format/WinVista/112_Tick_Green.ico" width="28" height="28" alt="" />}
+            {title.includes('Systemlogg') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Actions - VS2010/ico_format/WinVista/112_RefreshArrow_Blue.ico" width="28" height="28" alt="" />}
+            {title.includes('Nätverksöversikt') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Objects - VS2012/ico_format/WinVista/112_Server_Blue.ico" width="28" height="28" alt="" />}
             {/* Default icon for windows that don't match specific criteria */}
             {!title.includes('Systemövervakning') && 
              !title.includes('Systemvarningar') && 
@@ -231,14 +231,19 @@ const MiniWindow: React.FC<MiniWindowProps> = ({
              !title.includes('Kontrollpanel') &&
              !title.includes('Hjälp') &&
              !title.includes('Systemlogg') &&
-             !title.includes('Nätverksöversikt') && <img src="/app-icons/005_Task.ico" width="24" height="24" alt="" />} 
-             !title.includes('Nätverksöversikt') &&
+             !title.includes('Nätverksöversikt') && <img src="/icons/VS2012 Modern Image Library/x--archive--x/Objects - VS2012/ico_format/WinVista/005_Task.ico" width="28" height="28" alt="" />}
+             {!title.includes('Systemövervakning') && 
+             !title.includes('Systemvarningar') && 
              !title.includes('Responsstatistik') &&
              !title.includes('Tillgänglig Personal') &&
              !title.includes('Nödprotokoll') &&
              !title.includes('Akut Händelserapport') &&
+             !title.includes('Hjälp') &&
+             !title.includes('Systemlogg') &&
+             !title.includes('Nätverksöversikt') &&
+             !title.includes('Kontrollpanel') &&
              !title.includes('Insatskarta') && 
-             <img src="/app-icons/default.ico" width="16" height="16" alt="" />}
+             <img src="/icons/VS2012 Modern Image Library/x--archive--x/Objects - VS2012/ico_format/WinVista/003_Folder.ico" width="28" height="28" alt="" />}
           </span>
           {title}
         </div>
