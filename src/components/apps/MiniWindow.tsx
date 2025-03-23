@@ -231,8 +231,9 @@ const MiniWindow: React.FC<MiniWindowProps> = ({
              !title.includes('Responsstatistik') &&
              !title.includes('Tillgänglig Personal') &&
              !title.includes('Nödprotokoll') &&
-             !title.includes('Akut Händelserapport') && 
-             <img src="/icons/VS2012 Modern Image Library/x--archive--x/Objects - VS2012/ico_format/WinVista/Tip.ico" width="16" height="16" alt="" />}
+             !title.includes('Akut Händelserapport') &&
+             !title.includes('Insatskarta') && 
+             <img src="/app-icons/default.ico" width="16" height="16" alt="" />}
           </span>
           {title}
         </div>
