@@ -60,10 +60,10 @@ const MiniWindow: React.FC<MiniWindowProps> = ({
 
   const handleDragMove = (e: MouseEvent) => {
     if (!isDragging) return;
-    
+
     const newX = e.clientX - dragStart.x;
     const newY = e.clientY - dragStart.y;
-    
+
     // Optional: Add boundary constraints here if needed
     setWindowPosition({ x: newX, y: newY });
   };
@@ -86,15 +86,15 @@ const MiniWindow: React.FC<MiniWindowProps> = ({
 
   const handleResizeMove = (e: MouseEvent) => {
     if (!isResizing) return;
-    
+
     const deltaX = e.clientX - dragStart.x;
     const deltaY = e.clientY - dragStart.y;
-    
+
     setWindowSize({
       width: Math.max(150, windowSize.width + deltaX),
       height: Math.max(100, windowSize.height + deltaY)
     });
-    
+
     setDragStart({
       x: e.clientX,
       y: e.clientY
@@ -126,7 +126,7 @@ const MiniWindow: React.FC<MiniWindowProps> = ({
         x: windowPosition.x,
         y: windowPosition.y
       };
-      
+
       // Maximize to full content area
       const contentArea = document.querySelector('.win10-content');
       if (contentArea) {
@@ -163,7 +163,7 @@ const MiniWindow: React.FC<MiniWindowProps> = ({
         handleResizeMove(e);
       }
     };
-    
+
     const handleMouseUp = () => {
       if (isDragging) {
         handleDragEnd();
@@ -171,12 +171,12 @@ const MiniWindow: React.FC<MiniWindowProps> = ({
         handleResizeEnd();
       }
     };
-    
+
     if (isDragging || isResizing) {
       document.addEventListener('mousemove', handleMouseMove);
       document.addEventListener('mouseup', handleMouseUp);
     }
-    
+
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
@@ -208,7 +208,23 @@ const MiniWindow: React.FC<MiniWindowProps> = ({
         onMouseDown={handleDragStart}
         onDoubleClick={handleMaximizeToggle}
       >
-        <div className="win10-window-title">{title}</div>
+        <div className="win10-window-title">
+          {/* Window icon based on title */}
+          <span className="win10-window-icon mr-2">
+            {title.includes('Systemövervakning') && <i className="fas fa-desktop"></i>}
+            {title.includes('Systemvarningar') && <i className="fas fa-exclamation-triangle"></i>}
+            {title.includes('Kontrollpanel') && <i className="fas fa-sliders-h"></i>}
+            {title.includes('Hjälp') && <i className="fas fa-question-circle"></i>}
+            {title.includes('Systemlogg') && <i className="fas fa-clipboard-list"></i>}
+            {title.includes('Nätverksöversikt') && <i className="fas fa-network-wired"></i>}
+            {title.includes('Akut') && <i className="fas fa-ambulance"></i>}
+            {title.includes('Tillgänglig Personal') && <i className="fas fa-users"></i>}
+            {title.includes('Nödprotokoll') && <i className="fas fa-clipboard-check"></i>}
+            {title.includes('Insatskarta') && <i className="fas fa-map-marked-alt"></i>}
+            {!title.match(/(Systemövervakning|Systemvarningar|Kontrollpanel|Hjälp|Systemlogg|Nätverksöversikt|Akut|Tillgänglig Personal|Nödprotokoll|Insatskarta)/) && <i className="fas fa-window-restore"></i>}
+          </span>
+          {title}
+        </div>
         <div className="win10-window-controls">
           <button
             className="win10-window-control win10-minimize"
@@ -307,4 +323,4 @@ const MiniWindow: React.FC<MiniWindowProps> = ({
   );
 };
 
-export default MiniWindow; 
+export default MiniWindow;

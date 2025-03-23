@@ -1354,3 +1354,20 @@ legend {
   margin: 0 !important;
   padding: 0 !important;
 }
+
+/* Window icon styles */
+.win10-window-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 6px;
+  width: 16px;
+  height: 16px;
+  font-size: 14px;
+}
+
+.win10-window-header-active .win10-window-icon {
+  color: white;
+}
+
+/* Ensure window control buttons never have shadows */
