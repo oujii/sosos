@@ -434,7 +434,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0;
-  cursor: move;
+  cursor: default;
   user-select: none;
   height: 28px;
   border: none;
@@ -995,6 +995,17 @@ a {
   padding: 4px 8px;
   margin-bottom: 4px;
   border-radius: 2px;
+}
+
+
+/* Increase height for händelsebeskrivning textarea */
+textarea[placeholder="Händelsebeskrivning"] {
+  min-height: 150px !important;
+}
+
+.win10-window-content {
+  height: auto;
+  overflow-y: auto;
 }
 
 .win7-alert-critical {

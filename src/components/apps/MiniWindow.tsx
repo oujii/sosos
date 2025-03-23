@@ -192,8 +192,9 @@ const MiniWindow: React.FC<MiniWindowProps> = ({
       ref={windowRef}
       className={`win10-window ${isDragging ? 'dragging' : ''} ${isResizing ? 'resizing' : ''} ${isMaximized ? 'maximized' : ''}`}
       style={{
-        width: `${windowSize.width}px`,
-        height: `${windowSize.height}px`,
+        width: isMaximized ? '100%' : `${windowSize.width}px`,
+        height: isMaximized ? '100%' : 'auto',
+        minHeight: `${windowSize.height}px`,
         position: 'absolute',
         left: windowPosition.x,
         top: windowPosition.y,
