@@ -1361,9 +1361,14 @@ legend {
   align-items: center;
   justify-content: center;
   padding-left: 8px;
-  padding-right: 4px;
+  padding-right: 8px;
   width: 16px;
   height: 16px;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.win10-window-icon i {
   font-size: 14px;
 }
 
